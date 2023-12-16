@@ -1,0 +1,16 @@
+.button {
+  width: 4em;
+  height: 4em;
+
+  border: 1px solid black;
+  font-size: 14px;
+  font-weight: bold;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  text-transform: uppercase;
+}

@@ -1,0 +1,14 @@
+@import "../styles/mixins";
+
+.homepage-container {
+  @include reset-headers;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 40px;
+
+  padding: 40px 0;
+}
