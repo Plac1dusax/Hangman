@@ -1,0 +1,9 @@
+@import "../styles/mixins";
+
+.homepage-container {
+  @include reset-headers;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
