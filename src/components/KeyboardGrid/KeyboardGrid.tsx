@@ -2,7 +2,23 @@ import React from "react"
 import Button from "../Button/Button"
 import styles from "./keyboardGrid.module.scss"
 
-export default function ButtonsGrid() {
+type ButtonsGridProps = {
+  word: string[]
+  selectedLetters: string[]
+  setSelectedLetters: Function
+  remainingAttempts: number
+  setRemainingAttempts: Function
+}
+
+export default function ButtonsGrid(props: ButtonsGridProps) {
+  const {
+    word,
+    selectedLetters,
+    setSelectedLetters,
+    remainingAttempts,
+    setRemainingAttempts,
+  } = props
+
   const buttons: string[] = [
     "a",
     "b",
@@ -35,7 +51,17 @@ export default function ButtonsGrid() {
   return (
     <div className={styles["keyboard-grid"]}>
       {buttons.map((button: string, index: number) => {
-        return <Button key={index} buttonKey={button} />
+        return (
+          <Button
+            key={index}
+            word={word}
+            buttonKey={button}
+            selectedLetters={selectedLetters}
+            setSelectedLetters={setSelectedLetters}
+            remainingAttempts={remainingAttempts}
+            setRemainingAttempts={setRemainingAttempts}
+          />
+        )
       })}
     </div>
   )
