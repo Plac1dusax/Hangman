@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, use } from "react"
 import styles from "./button.module.scss"
 
 type ButtonKeyProps = {
@@ -27,11 +27,12 @@ export default function Button(props: ButtonKeyProps) {
     const selectedLetter = (e.target as HTMLButtonElement).textContent
 
     if (selectedLetter && selectedLetters.includes(selectedLetter)) return
+    setSelectedLetters([...selectedLetters, selectedLetter])
+
     if (selectedLetter && !word.includes(selectedLetter)) {
       setRemainingAttempts(remainingAttempts - 1)
     }
 
-    setSelectedLetters([...selectedLetters, selectedLetter])
     setClickedButton(true)
   }
 

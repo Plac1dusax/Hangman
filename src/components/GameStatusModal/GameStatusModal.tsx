@@ -2,15 +2,33 @@ import React from "react"
 import styles from "./gameStatusModal.module.scss"
 
 type GameStatusModalProps = {
-  remainingAttempts: number
+  gameStatus: string
 }
 
 export default function GameStatusModal(props: GameStatusModalProps) {
-  const { remainingAttempts } = props
+  const { gameStatus } = props
 
-  return remainingAttempts === 0 ? (
-    <div className={styles["game-status-modal-container"]}>
-      <div>YOU LOST!</div>
-    </div>
-  ) : null
+  let modal
+
+  switch (gameStatus) {
+    case "win":
+      modal = (
+        <div className={styles["game-status-modal-container"]}>
+          <div>YOU WIN!</div>
+        </div>
+      )
+      break
+    case "lose":
+      modal = (
+        <div className={styles["game-status-modal-container"]}>
+          <div>YOU LOST!</div>
+        </div>
+      )
+
+      break
+    default:
+      modal = null
+  }
+
+  return modal
 }

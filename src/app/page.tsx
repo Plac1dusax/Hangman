@@ -10,12 +10,19 @@ import styles from "../styles/homepage.module.scss"
 
 export default function Home() {
   const [remainingAttempts, setRemainingAttempts] = useState(6)
+  const [gameStatus, setGameStatus] = useState("")
   const [word, setWord] = useState<string[]>([])
   const [selectedLetters, setSelectedLetters] = useState([])
 
   useEffect(() => {
     setWord(pickRandomWord())
   }, [])
+
+  useEffect(() => {
+    if (remainingAttempts <= 0) {
+      setGameStatus("lose")
+    }
+  })
 
   function pickRandomWord() {
     const index = Math.floor(Math.random() * words.commonWords.length)
@@ -28,7 +35,12 @@ export default function Home() {
   return (
     <div className={styles["homepage-container"]}>
       <HangmanDrawing remainingAttempts={remainingAttempts} />
-      <HangmanWord word={word} selectedLetters={selectedLetters} />
+      <HangmanWord
+        word={word}
+        selectedLetters={selectedLetters}
+        remainingAttempts={remainingAttempts}
+        setGameStatus={setGameStatus}
+      />
       <KeyboardGrid
         word={word}
         selectedLetters={selectedLetters}
@@ -36,7 +48,7 @@ export default function Home() {
         remainingAttempts={remainingAttempts}
         setRemainingAttempts={setRemainingAttempts}
       />
-      <GameStatusModal remainingAttempts={remainingAttempts} />
+      <GameStatusModal gameStatus={gameStatus} />
     </div>
   )
 }
