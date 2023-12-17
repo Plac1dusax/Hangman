@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, use } from "react"
 import styles from "./button.module.scss"
 
 type ButtonKeyProps = {
@@ -9,6 +9,7 @@ type ButtonKeyProps = {
   setSelectedLetters: Function
   remainingAttempts: number
   setRemainingAttempts: Function
+  gameStatus: string
 }
 
 export default function Button(props: ButtonKeyProps) {
@@ -19,6 +20,7 @@ export default function Button(props: ButtonKeyProps) {
     setSelectedLetters,
     remainingAttempts,
     setRemainingAttempts,
+    gameStatus,
   } = props
 
   const [clickedButton, setClickedButton] = useState(false)
@@ -27,13 +29,20 @@ export default function Button(props: ButtonKeyProps) {
     const selectedLetter = (e.target as HTMLButtonElement).textContent
 
     if (selectedLetter && selectedLetters.includes(selectedLetter)) return
+    setSelectedLetters([...selectedLetters, selectedLetter])
+
     if (selectedLetter && !word.includes(selectedLetter)) {
       setRemainingAttempts(remainingAttempts - 1)
     }
 
-    setSelectedLetters([...selectedLetters, selectedLetter])
     setClickedButton(true)
   }
+
+  useEffect(() => {
+    if (gameStatus === "") {
+      setClickedButton(false)
+    }
+  }, [gameStatus])
 
   return (
     <div

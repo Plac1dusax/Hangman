@@ -8,6 +8,7 @@ type ButtonsGridProps = {
   setSelectedLetters: Function
   remainingAttempts: number
   setRemainingAttempts: Function
+  gameStatus: string
 }
 
 export default function ButtonsGrid(props: ButtonsGridProps) {
@@ -17,6 +18,7 @@ export default function ButtonsGrid(props: ButtonsGridProps) {
     setSelectedLetters,
     remainingAttempts,
     setRemainingAttempts,
+    gameStatus,
   } = props
 
   const buttons: string[] = [
@@ -60,6 +62,7 @@ export default function ButtonsGrid(props: ButtonsGridProps) {
             setSelectedLetters={setSelectedLetters}
             remainingAttempts={remainingAttempts}
             setRemainingAttempts={setRemainingAttempts}
+            gameStatus={gameStatus}
           />
         )
       })}
