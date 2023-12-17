@@ -11,6 +11,12 @@
   align-items: center;
 
   cursor: pointer;
+  user-select: none;
 
   text-transform: uppercase;
+}
+
+.button-clicked {
+  background-color: rgba($color: #222, $alpha: 0.8);
+  cursor: not-allowed;
 }
