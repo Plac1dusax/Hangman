@@ -5,11 +5,18 @@ type HangmanWordProps = {
   word: string[]
   selectedLetters: string[]
   remainingAttempts: number
+  gameStatus: string
   setGameStatus: Function
 }
 
 export default function HangmanWord(props: HangmanWordProps) {
-  const { word, selectedLetters, remainingAttempts, setGameStatus } = props
+  const {
+    word,
+    selectedLetters,
+    remainingAttempts,
+    gameStatus,
+    setGameStatus,
+  } = props
 
   useEffect(() => {
     const isGameWin =
@@ -17,7 +24,6 @@ export default function HangmanWord(props: HangmanWordProps) {
       word.length > 0 &&
       word.every((letter) => selectedLetters.includes(letter))
 
-    console.log(isGameWin)
     if (isGameWin) {
       setGameStatus("win")
     }
@@ -26,7 +32,20 @@ export default function HangmanWord(props: HangmanWordProps) {
   return (
     <div className={styles["letters-wrapper"]}>
       {word.map((letter, index) => {
-        return (
+        return gameStatus === "lose" ? (
+          selectedLetters.includes(letter) ? (
+            <div key={index} className={`${styles["letter"]}`}>
+              {letter}
+            </div>
+          ) : (
+            <div
+              key={index}
+              className={`${styles["letter"]} ${styles["reveal"]}`}
+            >
+              {letter}
+            </div>
+          )
+        ) : (
           <div key={index} className={styles["letter"]}>
             {selectedLetters.includes(letter) ? letter : null}
           </div>

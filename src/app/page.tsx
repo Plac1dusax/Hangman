@@ -19,6 +19,12 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
+    if (gameStatus === "") {
+      setWord(pickRandomWord())
+    }
+  }, [gameStatus])
+
+  useEffect(() => {
     if (remainingAttempts <= 0) {
       setGameStatus("lose")
     }
@@ -39,6 +45,7 @@ export default function Home() {
         word={word}
         selectedLetters={selectedLetters}
         remainingAttempts={remainingAttempts}
+        gameStatus={gameStatus}
         setGameStatus={setGameStatus}
       />
       <KeyboardGrid
@@ -47,8 +54,14 @@ export default function Home() {
         setSelectedLetters={setSelectedLetters}
         remainingAttempts={remainingAttempts}
         setRemainingAttempts={setRemainingAttempts}
+        gameStatus={gameStatus}
       />
-      <GameStatusModal gameStatus={gameStatus} />
+      <GameStatusModal
+        setRemainingAttempts={setRemainingAttempts}
+        gameStatus={gameStatus}
+        setGameStatus={setGameStatus}
+        setSelectedLetters={setSelectedLetters}
+      />
     </div>
   )
 }

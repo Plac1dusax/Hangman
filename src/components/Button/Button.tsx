@@ -9,6 +9,7 @@ type ButtonKeyProps = {
   setSelectedLetters: Function
   remainingAttempts: number
   setRemainingAttempts: Function
+  gameStatus: string
 }
 
 export default function Button(props: ButtonKeyProps) {
@@ -19,6 +20,7 @@ export default function Button(props: ButtonKeyProps) {
     setSelectedLetters,
     remainingAttempts,
     setRemainingAttempts,
+    gameStatus,
   } = props
 
   const [clickedButton, setClickedButton] = useState(false)
@@ -35,6 +37,12 @@ export default function Button(props: ButtonKeyProps) {
 
     setClickedButton(true)
   }
+
+  useEffect(() => {
+    if (gameStatus === "") {
+      setClickedButton(false)
+    }
+  }, [gameStatus])
 
   return (
     <div
